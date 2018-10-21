@@ -1,11 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+<nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href=""><router-link to="/">Home</router-link></a></li>
+            <li class="uk-parent"><a href=""><router-link to="/trainers">Trainers</router-link></a></li>
+            <li><a href="">Appointments</a></li>
+            <li><a href="">Profile</a></li>
+        </ul>
+    </div>
+</nav>
     </div>
     <router-view/>
   </div>
+
+
 </template>
 
 <style>
