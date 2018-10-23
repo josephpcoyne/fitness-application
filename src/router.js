@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import UsersShow from "./views/UsersShow.vue";
 import Trainers from "./views/Trainers.vue";
 import TrainersShow from "./views/TrainersShow.vue";
 import Appointments from "./views/Appointments.vue";
@@ -13,7 +14,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     { path: "/", name: "home", component: Home },
-
+    { path: "/users/:id", name: "users-show", component: UsersShow },
     { path: "/trainers", name: "trainers", component: Trainers },
     { path: "/trainers/:id", name: "trainers-show", component: TrainersShow },
     { path: "/appointments", name: "appointments", component: Appointments },

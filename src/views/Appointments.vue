@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="appointments">
     <h1>{{ message }}</h1>
     <div v-for="appointment in appointments">
       <h3>With {{appointment.trainer_name}} at {{appointment.strftime}}</h3>

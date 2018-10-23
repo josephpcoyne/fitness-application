@@ -1,10 +1,15 @@
 
 <template>
-  <div class="home">
+  <div class="trainers">
 			<div v-for="trainer in trainers">
 <!--  	<img :src="getImgUrl(trainer.profile_picture_url)"> -->
 					<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.full_name}} </router-link>
 			    <p>{{trainer.bio}}</p>
+			    <div v-for="tag in trainer.tags">
+			    	<li>{{tag.name}}</li>
+			    </div>
+			    <br>
+
  			 </div>
   	</div>
 </template>
@@ -17,7 +22,8 @@ var axios = require("axios");
 export default {
 	data: function() {
 		return {
-			trainers: []
+			trainers: [],
+			searchText: ""
 		};
 	},
 	created: function() {

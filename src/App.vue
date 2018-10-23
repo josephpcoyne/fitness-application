@@ -16,7 +16,7 @@
               <li><a href=""><router-link to="/appointments">Appointments</router-link>
               </a></li>
 
-              <li><a href="">Profile</a></li>
+              <li><a href=""></a><router-link to="/users/me">Profile</router-link></li>
 
               <li><a href=""><router-link to="/signup">Signup</router-link></a></li>
 
