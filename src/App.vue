@@ -1,16 +1,30 @@
 <template>
   <div id="app">
     <div id="nav">
-<nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href=""><router-link to="/">Home</router-link></a></li>
-            <li class="uk-parent"><a href=""><router-link to="/trainers">Trainers</router-link></a></li>
-            <li><a href="">Appointments</a></li>
-            <li><a href="">Profile</a></li>
-        </ul>
-    </div>
-</nav>
+      <nav>
+        <div>
+          <ul>
+            <li id="logo"><a href=""><router-link to="/">Sparq</router-link></a></li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><a href=""><router-link to="/">Home</router-link></a></li>
+
+              <li><a href=""><router-link to="/trainers">Trainers</router-link></a></li>
+
+              <li><a href=""><router-link to="/appointments">Appointments</router-link>
+              </a></li>
+
+              <li><a href="">Profile</a></li>
+
+              <li><a href=""><router-link to="/signup">Signup</router-link></a></li>
+
+              <li><a href=""><router-link to="/login">Login</router-link> </a></li>
+              <li><a href=""><router-link to="/logout">Logout</router-link> </a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <router-view/>
   </div>
@@ -25,15 +39,17 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-/*#nav {
-  padding: 30px;
+#nav {
+  margin-bottom: 30px;
+}
+#logo {
+  color: orange;
+}
+/*
+#nav a {
+  color: #2c3e50;
 }
 */
-/*#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}*/
-
 /*#nav a.router-link-exact-active {
   color: #42b983;
 }*/
