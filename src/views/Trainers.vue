@@ -1,16 +1,17 @@
 
 <template>
   <div class="trainers">
+
 			<div v-for="trainer in trainers">
 <!--  	<img :src="getImgUrl(trainer.profile_picture_url)"> -->
-					<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.full_name}} </router-link>
+					<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.full_name}} 
+					</router-link>
+					<p>★★★★★</p>
 			    <p>{{trainer.bio}}</p>
 			    <div v-for="tag in trainer.tags">
 			    	<li>{{tag.name}}</li>
-			    </div>
-			    <br>
-
- 			 </div>
+			    </div><br>
+			  </div>			 
   	</div>
 </template>
 

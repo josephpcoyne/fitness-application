@@ -5,23 +5,18 @@
         <div>
           <ul>
             <li id="logo"><a href=""><router-link to="/">Sparq</router-link></a></li>
-            </ul>
+          </ul>
           </div>
           <div>
             <ul>
-              <li><a href=""><router-link to="/">Home</router-link></a></li>
+              <li v-if="isLoggedIn()"><router-link to="/trainers">Trainers</router-link></li>
+              <li v-if="isLoggedIn()""><router-link to="/appointments">Appointments</router-link>
+              </li>
+              <li v-if="isLoggedIn()"><router-link to="/users/me">Profile</router-link></li>
+              <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link> </li>
+              <li v-else><router-link to="/login">Login</router-link></li>
+              <li v-else><router-link to="/signup">Signup</router-link></li>
 
-              <li><a href=""><router-link to="/trainers">Trainers</router-link></a></li>
-
-              <li><a href=""><router-link to="/appointments">Appointments</router-link>
-              </a></li>
-
-              <li><a href=""></a><router-link to="/users/me">Profile</router-link></li>
-
-              <li><a href=""><router-link to="/signup">Signup</router-link></a></li>
-
-              <li><a href=""><router-link to="/login">Login</router-link> </a></li>
-              <li><a href=""><router-link to="/logout">Logout</router-link> </a></li>
           </ul>
         </div>
       </nav>
@@ -54,3 +49,17 @@
   color: #42b983;
 }*/
 </style>
+
+<script>
+export default {
+methods: {
+  isLoggedIn: function() {
+    if(localStorage.getItem("jwt")) {
+        return true;
+      }
+      return false;
+    },
+  },
+    computed: {}
+  };
+</script>

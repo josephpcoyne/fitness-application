@@ -2,14 +2,12 @@
   <div class="appointments">
     <h1>{{ message }}</h1>
     <div v-for="appointment in appointments">
+      <router-link v-bind:to="'/appointments/' + appointment.id"> 
       <h3>With {{appointment.trainer_name}} at {{appointment.strftime}}</h3>
+      </router-link>
     </div>
   </div>
 </template>
-
-<style>
-</style>
-
 <script>
 import axios from "axios";
 export default {
@@ -25,7 +23,11 @@ export default {
       this.appointments = response.data;
     });
   },
-  methods: {},
+  methods: {
+    setCurrentAppointment: function(appointment) {
+      this.currentAppointment = appointment;
+    },
+  },
   computed: {}
 };
 </script>
