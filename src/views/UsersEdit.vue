@@ -7,25 +7,33 @@
       </ul>
       <div class="form-group">
         <label>First Name:</label> 
-        <input type="text" class="form-control" v-model="firstName">
+        <input type="text" v-model="firstName">
       </div>
       <div class="form-group">
         <label>Last Name:</label>
-        <input type="text" class="form-control" v-model="lastName">
+        <input type="text" v-model="lastName">
       </div>
       <div class="form-group">
         <label>Username:</label>
-        <input type="text" class="form-control" v-model="username">
+        <input type="text" v-model="username">
       </div>
       <div class="form-group">
         <label>Email:</label>
-        <input type="email" class="form-control" v-model="email">
+        <input type="email" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Height:</label>
+        <input type="number" v-model="height">
+      </div>
+      <div class="form-group">
+        <label>Weight:</label>
+        <input type="number" v-model="weight">
       </div>
       <div class="form-group">
         <label>Profile Picture:</label>
-        <input type="number" class="form-control" v-model="pictureUrl">
+        <input type="text" v-model="pictureUrl">
       </div>
-      <input type="submit" class="btn btn-primary" value="Submit">
+      <input type="submit" value="Submit">
     </form>
   </div>
 </template>
@@ -40,6 +48,8 @@ export default {
       username: "",
       email: "",
       pictureUrl: "",
+      height: "",
+      weight: "",
       errors: []
     };
   },
@@ -50,7 +60,9 @@ export default {
         last_name: this.lastName,
         username: this.username,
         email: this.email,
-        picture_url: this.pictureUrl
+        picture_url: this.pictureUrl,
+        height: this.height,
+        weight: this.weight
       };
       axios
         .patch("http://localhost:3000/api/users/" + this.$route.params.id, params)

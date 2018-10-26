@@ -25,7 +25,7 @@
           <label></label> 
           <input type="datetime-local" class="form-control" v-model="time">
         </div>
-        <input type="submit" value="Schedule">
+        <input type="submit" value="submit">
       </form>
     </div>
 
@@ -66,8 +66,17 @@ export default {
   methods: {
     submit: function() {
       var params = {
-        time: this.time
+        time: this.time,
+        trainer_id: this.trainer.id
       }
+      axios
+        .post("http://localhost:3000/api/appointments", params)
+        .then(response => {
+          this.$router.push("/appointments");
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
     },
     getImgUrl(filename) {
     var images = require.context('../assets/', false, /\.jpg$/)
