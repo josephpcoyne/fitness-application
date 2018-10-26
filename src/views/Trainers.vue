@@ -3,9 +3,9 @@
   <div class="trainers">
 
 			<div v-for="trainer in trainers">
-<!--  	<img :src="getImgUrl(trainer.profile_picture_url)"> -->
 					<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.full_name}} 
-					</router-link>
+					</router-link><br>
+					<img :src="getImgUrl(trainer.profile_picture_url)">
 					<p>★★★★★</p>
 			    <p>{{trainer.bio}}</p>
 			    <div v-for="tag in trainer.tags">
@@ -16,6 +16,10 @@
 </template>
 
 <style>
+img {
+  height: 35%;
+  width: 35%;
+}
 </style>
 
 <script>

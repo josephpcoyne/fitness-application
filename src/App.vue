@@ -4,9 +4,10 @@
       <nav>
         <div>
           <ul>
-            <li id="logo"><a href=""><router-link to="/">Sparq</router-link></a></li>
+            <li id="logo"><router-link to="/">Sparq</router-link></li>
           </ul>
           </div>
+         
           <div>
             <ul>
               <li v-if="isLoggedIn()"><router-link to="/trainers">Trainers</router-link></li>
@@ -14,17 +15,15 @@
               </li>
               <li v-if="isLoggedIn()"><router-link to="/users/me">Profile</router-link></li>
               <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link> </li>
-              <li v-else><router-link to="/login">Login</router-link></li>
-              <li v-else><router-link to="/signup">Signup</router-link></li>
-
-          </ul>
-        </div>
-      </nav>
-    </div>
+              <li v-else><router-link to="/userlogin">Login</router-link></li>
+              <li v-else><router-link to="/usersignup">Signup</router-link></li>
+              
+            </ul>
+          </div>
+        </nav>
+      </div>
     <router-view/>
   </div>
-
-
 </template>
 
 <style>

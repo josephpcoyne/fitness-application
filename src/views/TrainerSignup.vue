@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+  <div class="trainer-signup">
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Signup</h1>
@@ -30,7 +30,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data: function() {
     return {
@@ -38,26 +37,26 @@ export default {
       email: "",
       password: "",
       passwordConfirmation: "",
-            errors: []
-          };
-        },
-        methods: {
-          submit: function() {
-            var params = {
-              name: this.name,
-              email: this.email,
-              password: this.password,
-              password_confirmation: this.passwordConfirmation
-            };
-            axios
-              .post("http://localhost:3000/api/users", params)
-              .then(response => {
-                this.$router.push("/login");
-              })
-              .catch(error => {
-                this.errors = error.response.data.errors;
-              });
-          }
-        }
+      errors: []
+    };
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.passwordConfirmation
       };
-      </script>
+      axios
+        .post("http://localhost:3000/api/trainers", params)
+        .then(response => {
+          this.$router.push("/trainerlogin");
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    }
+  }
+};
+</script>

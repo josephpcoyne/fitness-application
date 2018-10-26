@@ -7,7 +7,7 @@
       </ul>
       <div class="form-group">
         <label>First Name:</label> 
-        <input type="text" v-model="firstName">
+        <input type="text" class="form-control" v-model="firstName">
       </div>
       <div class="form-group">
         <label>Last Name:</label>
@@ -52,6 +52,14 @@ export default {
       weight: "",
       errors: []
     };
+  },
+  created: function() {
+    axios
+      .get("http://localhost:3000/api/users/" + this.$route.params.id)
+      .then(response => {
+        this.user = response.data;
+        this.first_name = response.data.first_name
+      });
   },
   methods: {
     submit: function() {
