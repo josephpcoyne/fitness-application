@@ -1,5 +1,5 @@
 <template>
-  <div class="trainer-signup">
+  <div class="trainers-signup">
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Signup</h1>
@@ -51,7 +51,7 @@ export default {
       axios
         .post("http://localhost:3000/api/trainers", params)
         .then(response => {
-          this.$router.push("/trainerlogin");
+          this.$router.push("/trainerslogin");
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -1,8 +1,8 @@
 <template>
-  <div class="user-login">
+  <div class="trainers-login">
     <div class="container">
       <form v-on:submit.prevent="submit()">
-        <h1>Login</h1>
+        <h1>Trainer Login</h1>
         <ul>
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
         </ul>
@@ -39,12 +39,13 @@ export default {
         password: this.password
       };
       axios
-        .post("http://localhost:3000/api/user_sessions", params)
+        .post("http://localhost:3000/api/trainer_sessions", params)
         .then(response => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          this.$router.push("/");
+          localStorage.setItem("trainer_id", true);
+          this.$router.push("/trainershome");
         })
         .catch(error => {
           this.errors = ["Invalid email or password."];

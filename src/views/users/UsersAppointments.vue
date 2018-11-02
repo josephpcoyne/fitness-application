@@ -1,8 +1,8 @@
 <template>
-  <div class="appointments">
+  <div class="users-appointments">
     <h1>{{ message }}</h1>
     <div v-for="appointment in appointments">
-      <router-link v-bind:to="'/appointments/' + appointment.id"> 
+      <router-link v-bind:to="'/usersappointments/' + appointment.id"> 
       <h3>With {{appointment.trainer_name}} at {{appointment.strftime}}</h3>
       </router-link>
     </div>

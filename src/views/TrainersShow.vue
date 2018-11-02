@@ -3,7 +3,8 @@
   <div class="trainers-show">
   	<div class="container">
   		<h2>{{ trainer.full_name }}</h2>
-      <img :src="getImgUrl(trainer.profile_picture_url)">
+      <button v-if="isTrainer()"><router-link to="/trainers/me/edit">Edit</router-link></button><br>
+      <img :src="trainer.image_url">
       <p>★★★★★</p>
   		<h3>{{ trainer.bio }}</h3>
   		<h3>{{ trainer.rating }}</h3>
@@ -15,7 +16,7 @@
 
 <!-- Appointment Create Modal -->
 
-    <div class="appointment-new">
+    <div v-if="isUser()" class="appointment-new">
       <h4>Schedule {{trainer.full_name}}</h4>
       <form v-on:submit.prevent="submit()">
         <ul>
@@ -27,11 +28,10 @@
         </div>
         <input type="submit" value="submit">
       </form>
+      <router-link to="/trainers">Back to trainers</router-link>
     </div>
 
 <!-- Appointment Create Modal End -->
-
-  <router-link to="/trainers">Back to trainers</router-link>
   </div>
 </template>
 
@@ -56,12 +56,6 @@ export default {
   	.then(response => {
   		this.trainer = response.data;
   	});
-
-    axios.post("http://localhost:3000/api/appointments", params).then(response => {
-      this.$router.push("/appointments");
-    }).catch(error => {
-      this.errors = error.response.data.errors;
-    });
   },
   methods: {
     submit: function() {
@@ -78,11 +72,19 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    getImgUrl(filename) {
-    var images = require.context('../assets/', false, /\.jpg$/)
-    return images('./' + filename + ".jpg")    
+    isUser: function() {
+    if(localStorage.getItem("user_id")) {
+      return true;
+    }
+    return false;
   },
-},
+    isTrainer: function() {
+      if(localStorage.getItem("trainer_id")) {
+        return true;
+      }
+      return false;
+    },  
+  },
   computed: {}
 };
 </script>

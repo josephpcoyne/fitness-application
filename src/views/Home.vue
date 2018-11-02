@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <router-link to="/usersignup">Signup</router-link>
+    <router-link to="/userssignup">Signup</router-link>
     <br>
-    <router-link to="/userlogin">Login</router-link>
+    <router-link to="/userslogin">Login</router-link>
     <br>
-    <router-link to="/trainerhome">Trainer Portal</router-link>
+    <router-link to="/trainershome">Trainer Portal</router-link>
   </div>
 </template>
 

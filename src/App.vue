@@ -6,18 +6,18 @@
           <ul>
             <li id="logo"><router-link to="/">Sparq</router-link></li>
           </ul>
-          </div>
-         
-          <div>
+        </div>
+         <div>
             <ul>
-              <li v-if="isLoggedIn()"><router-link to="/trainers">Trainers</router-link></li>
-              <li v-if="isLoggedIn()""><router-link to="/appointments">Appointments</router-link>
-              </li>
-              <li v-if="isLoggedIn()"><router-link to="/users/me">Profile</router-link></li>
-              <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link> </li>
-              <li v-else><router-link to="/userlogin">Login</router-link></li>
-              <li v-else><router-link to="/usersignup">Signup</router-link></li>
-              
+              <li v-if="isUser()"><router-link to="/trainers">Trainers</router-link></li>
+              <li v-if="isUser()"><router-link to="/usersappointments">Appointments</router-link></li>
+              <li v-else-if="isTrainer()"><router-link to="/trainersappointments">Appointments</router-link></li>
+              <li v-else><router-link to="/userslogin">Login</router-link></li>
+              <li v-else><router-link to="/userssignup">Signup</router-link></li>
+              <li v-if="isUser()"><router-link to="/users/me">Profile</router-link></li>
+    
+              <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link></li>
+
             </ul>
           </div>
         </nav>
@@ -54,6 +54,18 @@ export default {
 methods: {
   isLoggedIn: function() {
     if(localStorage.getItem("jwt")) {
+        return true;
+      }
+      return false;
+    },
+  isTrainer: function() {
+    if(localStorage.getItem("trainer_id")) {
+        return true;
+      }
+      return false;
+    },  
+    isUser: function() {
+    if(localStorage.getItem("user_id")) {
         return true;
       }
       return false;

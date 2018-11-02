@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
     <form v-on:submit.prevent="submit()">
-      <h1>New Recipe</h1>
+      <h1>Edit Profile</h1>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
       </ul>
@@ -58,7 +58,13 @@ export default {
       .get("http://localhost:3000/api/users/" + this.$route.params.id)
       .then(response => {
         this.user = response.data;
-        this.first_name = response.data.first_name
+        this.firstName = response.data.first_name
+        this.lastName = response.data.last_name
+        this.username = response.data.username
+        this.email = response.data.email
+        this.height = response.data.height
+        this.weight = response.data.weight
+        this.pictureUrl = response.data.pictureUrl
       });
   },
   methods: {

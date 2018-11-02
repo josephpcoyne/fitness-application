@@ -1,11 +1,11 @@
 
 <template>
-  <div class="trainers">
+  <div class="trainers-index">
 
 			<div v-for="trainer in trainers">
 					<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.full_name}} 
 					</router-link><br>
-					<img :src="getImgUrl(trainer.profile_picture_url)">
+					<img :src="(trainer.image_url)">
 					<p>★★★★★</p>
 			    <p>{{trainer.bio}}</p>
 			    <div v-for="tag in trainer.tags">
@@ -38,10 +38,7 @@ export default {
 		});
 	},
 	methods: {
-		getImgUrl(filename) {
-    var images = require.context('../assets/', false, /\.jpg$/)
-    return images('./' + filename + ".jpg")
-  },
+
   setCurrentTrainer: function(trainer) {
     this.currentTrainer = Trainer;
 	},
