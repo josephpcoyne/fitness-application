@@ -5,7 +5,8 @@
       <h3>{{ user.email }}</h3>
       <h3>{{ user.weight }}</h3>
       <h3>{{ user.height }}</h3>
-      <button><router-link to="/users/:id/edit">Edit</router-link></button>
+      <button>
+        <router-link :to="'/users/' + user.id + '/edit'">Edit</router-link></button>
     </div>
   </div>
 </template>

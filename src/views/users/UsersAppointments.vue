@@ -3,7 +3,7 @@
     <h1>{{ message }}</h1>
     <div v-for="appointment in appointments">
       <router-link v-bind:to="'/usersappointments/' + appointment.id"> 
-      <h3>With {{appointment.trainer_name}} at {{appointment.strftime}}</h3>
+      <h3>With {{appointment.trainer_first_name}} {{appointment.trainer_last_name}} at {{appointment.strftime}}</h3>
       </router-link>
     </div>
   </div>

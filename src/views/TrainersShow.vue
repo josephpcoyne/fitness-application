@@ -1,9 +1,11 @@
 
 <template>
   <div class="trainers-show">
-  	<div class="container">
-  		<h2>{{ trainer.full_name }}</h2>
-      <button v-if="isTrainer()"><router-link to="/trainers/me/edit">Edit</router-link></button><br>
+  	<div>
+  		<h2>{{ trainer.first_name }} {{ trainer.last_name }}</h2>
+      <button v-if="isTrainer()">
+        <router-link :to="'/trainers/' + trainer.id + '/edit'">Edit</router-link>
+      </button><br>
       <img :src="trainer.image_url">
       <p>★★★★★</p>
   		<h3>{{ trainer.bio }}</h3>
@@ -12,6 +14,7 @@
         <li>{{tag.name}}</li>
       </div>
   		<h4>{{ trainer.location }}</h4>
+      <iframe width="560" height="315" :src="trainer.video_url + '?&showinfo=0&controls=0&amp;start=5'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   	</div>
 
 <!-- Appointment Create Modal -->
