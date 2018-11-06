@@ -31,7 +31,7 @@
       </div>
       <div class="form-group">
         <label>Profile Picture:</label>
-        <input type="text" v-model="pictureUrl">
+        <input type="file" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" value="Submit">
     </form>
@@ -48,7 +48,7 @@ export default {
       lastName: "",
       username: "",
       email: "",
-      pictureUrl: "",
+      image: "",
       height: "",
       weight: "",
       errors: []
@@ -65,23 +65,28 @@ export default {
         this.email = response.data.email
         this.height = response.data.height
         this.weight = response.data.weight
-        this.pictureUrl = response.data.pictureUrl
+        this.image = response.data.image
       });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     submit: function() {
-      var params = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        username: this.username,
-        email: this.email,
-        picture_url: this.pictureUrl,
-        height: this.height,
-        weight: this.weight
-      };
+      var formData = new FormData();
+        formData.append("first_name", this.firstName);
+        formData.append("last_name", this.lastName);
+        formData.append("username", this.username);
+        formData.append("email", this.email);
+        formData.append("image", this.image);
+        formData.append("height", this.height);
+        formData.append("weight", this.weight);
       axios
-        .patch("http://localhost:3000/api/users/" + this.$route.params.id, params)
+        .patch("http://localhost:3000/api/users/" + this.$route.params.id, formData)
         .then(response => {
+          this.$refs.fileInput.value = "";
           this.$router.push("/users/me");
         })
         .catch(error => {

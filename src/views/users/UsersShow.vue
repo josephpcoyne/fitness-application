@@ -2,6 +2,7 @@
   <div class="users-show">
     <div>
       <h2>{{ user.first_name }} {{user.last_name}}</h2>
+      <img :src="user.image_url">
       <h3>{{ user.email }}</h3>
       <h3>{{ user.weight }}</h3>
       <h3>{{ user.height }}</h3>

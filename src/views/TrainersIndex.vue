@@ -4,17 +4,19 @@
   	<input v-model="searchText" list="tags" placeholder="Search by Tags">
   	
   	<transition-group name="fade">
-		<div v-for="trainer in orderBy(filterBy(trainers, searchText), sortAttribute, sortAscending)" v-bind:key="trainer.id">
-			<img :src="(trainer.image_url)">
-			<router-link v-bind:to="'/trainers' + trainer.id">{{trainer.full_name}} </router-link>
-			<p>{{trainer.bio}}</p>
-			<div v-for="tag in trainer.tags">
-				<li v-on:click="searchText = tag.name">{{tag.name}}</li>
+			<div v-for="trainer in orderBy(filterBy(trainers, searchText), sortAttribute, sortAscending)" v-bind:key="trainer.id">
+				<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.first_name}} {{trainer.last_name}} </router-link>
+				<br>
+				<img :src="(trainer.image_url)">
 
-			</div>
-			<br>
- 		</div>
- 	</transition-group>
+				<p>{{trainer.bio}}</p>
+				<div v-for="tag in trainer.tags">
+					<li v-on:click="searchText = tag.name">{{tag.name}}</li>
+
+				</div>
+				<br>
+	 		</div>
+ 		</transition-group>
  	 	<datalist id="tags">
  			<option v-for="tag in tags">{{ tag.name }}</option>
  	 	</datalist>
@@ -70,7 +72,8 @@ export default {
 			tags: [],
 			searchText: "",
 			sortAttribute: "name",
-			sortAscending: 1
+			sortAscending: 1,
+			errors: []
 		};
 	},
 	created: function() {
