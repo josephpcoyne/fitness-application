@@ -1,56 +1,161 @@
 <template>
   <div class="trainers-edit">
-    <form v-on:submit.prevent="submit()">
-      <h1>Edit Profile</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>First Name:</label> 
-        <input type="text" class="form-control" v-model="firstName">
-      </div>
-      <div class="form-group">
-        <label>Last Name:</label>
-        <input type="text" v-model="lastName">
-      </div>
-      <div class="form-group">
-        <label>Username:</label>
-        <input type="text" v-model="username">
-      </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <input type="email" v-model="email">
-      </div>
-      <div class="form-group">
-        <label>Bio:</label>
-        <input type="text" v-model="bio">
-      </div>
-      <div class="form-group">
-        <label>Location:</label>
-        <input type="text" v-model="location">
-      </div>      
-      <div class="form-group">
-        <label>Video Url:</label>
-        <input type="text" v-model="videoUrl">
-      </div>
-        <div class="form-group">
-          <label>Profile Picture:</label>
-          <input type="file" v-on:change="setFile($event)" ref="fileInput">
+    <!-- WRAPPER -->
+    <div id="wrapper">
+
+      <!-- PAGE TITLE -->
+      <header id="page-title"> <!-- style="background-image:url('assets/images/demo/parallax_bg.jpg')" -->
+        <!--
+          Enable only if bright background image used
+          <span class="overlay"></span>
+        -->
+
+        <div class="container">
+          <h1>Edit Profile</h1>
+
+          <ul class="breadcrumb">
+            <li><router-link to="/trainers/me">Profile</router-link></li>
+            <li class="active">Edit</li>
+          </ul>
         </div>
-        <div>
-          <vue-tags-input
-            v-model="tag"
-            :tags="tags"
-            :autocomplete-items="filteredItems"
-            @tags-changed="newTags => tags = newTags"
-          />
+      </header>
+
+      <section id="contact" class="container">
+
+        <div class="row">
+
+          <!-- FORM -->
+          <div class="col-md-8">
+            <!-- 
+              if you want to use your own contact script, remove .hide class
+            -->
+
+            <!-- SENT OK -->
+<!--             <div id="_sent_ok_" class="alert alert-success fade in fsize16 hide">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>Thank You!</strong> Your message successfully sent!
+            </div> -->
+            <!-- /SENT OK -->
+
+            <!-- SENT FAILED -->
+<!--             <div id="_sent_required_" class="alert alert-danger fade in fsize16 hide">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>Failed!</strong> Please complete all mandatory (*) fields!
+            </div> -->
+            <!-- /SENT FAILED -->
+
+            <form id="contactForm" class="white-row" v-on:submit.prevent="submit()">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-5">
+                    <label>First Name</label>
+                    <input type="text" v-model="firstName" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="contact_name" id="contact_name">
+                  </div>                  
+                  <div class="col-md-5">
+                    <label>Last Name</label>
+                    <input type="text" v-model="lastName" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="contact_name" id="contact_name">
+                  </div>            
+                  <div class="col-md-5">
+                    <label>Username</label>
+                    <input type="text" v-model="username" maxlength="100" class="form-control" name="contact_name" id="contact_name">
+                  </div>
+                  <div class="col-md-5">
+                    <label>E-mail</label>
+                    <input type="email" v-model="email" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="contact_email" id="contact_email">
+                  </div>
+                  <div class="col-md-5">
+                    <label>Password</label>
+                    <input type="password" v-model="password" data-msg-required="Please enter your phone" data-msg-email="Please enter your phone" maxlength="100" class="form-control" name="contact_phone" id="contact_phone">
+                  </div>          
+                  <div class="col-md-5" v-if="password">
+                    <label>Password Confirmation</label>
+                    <input type="password" v-model="passwordConfirmation" data-msg-required="Please enter your phone" data-msg-email="Please enter your phone" maxlength="100" class="form-control" name="contact_phone" id="contact_phone">
+                  </div>
+                  <div class="col-md-8">
+                    <label>Location</label>
+                    <input type="text" v-model="location" maxlength="100" class="form-control" name="contact_name" id="contact_name">
+                  </div>
+                  <div class="col-md-8">
+                    <label>Video Url</label>
+                    <input type="text" v-model="videoUrl" maxlength="100" class="form-control" name="contact_name" id="contact_name">
+                  </div> 
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label>Profile Picture</label>
+                    <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label>Bio</label>
+                    <textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="contact_message" id="contact_message">{{trainer.bio}}</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label>Workout Tags</label>
+                    <vue-tags-input name="user_tags"
+                      v-model="tag"
+                      :tags="tags"
+                      :autocomplete-items="filteredItems"
+                      @tags-changed="newTags => tags = newTags"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <br />
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <input id="contact_submit" type="submit" value="Save" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                  <button id="delete" type="button" class="btn btn-danger" v-on:click="deleteTrainer(trainer)">Delete Account</button>
+                </div>
+              </div>
+            </form>
+          
+          </div>
+          <!-- /FORM -->
+
+
+          <!-- INFO -->
+          <div class="col-md-4">
+            <div class="white-row">
+              <figure>
+                <img class="radius6 img-responsive" :src="trainer.image_url" alt="" />
+              </figure>
+              <p>
+                Lorem Ipsum banana mango blackberry persimmon apple raspberries
+              </p>
+            </div>
+          </div>
+          <!-- /INFO -->
         </div>
-      <input type="submit" value="Submit">
-    </form>
-    <button v-on:click="deleteTrainer(trainer)">Delete Account</button>
+      </section>
+    </div>
+    <!-- /WRAPPER -->
   </div>
 </template>
-
+<style>
+.tags.valid {
+  background-color: #FF7F50;
+  }
+  #delete {
+  align-items: right;
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  margin-top: 10px;
+  }
+</style>
 <script>
 import axios from "axios";
 import VueTagsInput from "@johmun/vue-tags-input";
@@ -60,9 +165,12 @@ export default {
   },
   data: function() {
     return {
+      trainer: "",
       firstName: "",
       lastName: "",
       username: "",
+      password: "",
+      passwordConfirmation: "",
       email: "",
       videoUrl: "",
       image: "",
@@ -71,7 +179,7 @@ export default {
       tag: "",
       tags: [],
       autocompleteItems: [],
-      errors: []
+      errors: [],
     };
   },
   created: function() {
@@ -108,6 +216,8 @@ export default {
       formData.append("first_name", this.firstName);
       formData.append("last_name", this.lastName);
       formData.append("username", this.username);
+      formData.append("password", this.password);
+      formData.append("password_confirmation", this.passwordConfirmation);
       formData.append("email", this.email);
       formData.append("image", this.image);
       formData.append("bio", this.bio);
@@ -144,7 +254,7 @@ export default {
       return this.autocompleteItems.filter(i =>
         new RegExp(this.tag, "i").test(i.text)
       );
-    }
+    } 
   }
 };
 </script>

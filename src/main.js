@@ -3,7 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
-
+import Chat from "vue-beautiful-chat";
+Vue.use(Chat);
 Vue.use(Vue2Filters);
 
 var jwt = localStorage.getItem("jwt");

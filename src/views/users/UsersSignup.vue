@@ -1,29 +1,116 @@
 <template>
   <div class="users-signup">
-    <div class="container">
-      <form v-on:submit.prevent="submit()">
-        <h1>Signup</h1>
-        <ul>
-          <li class="text-danger" v-for="error in errors">{{ error }}</li>
-        </ul>
-        <div class="form-group">
-          <label>Name:</label> 
-          <input type="text" class="form-control" v-model="name">
+
+
+  <!-- WRAPPER -->
+  <div id="wrapper">
+
+    <div id="shop">
+
+      <!-- PAGE TITLE -->
+      <header id="page-title">
+        <div class="container">
+          <h1>Sign up</h1>
+
+          <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Sign up</li>
+          </ul>
         </div>
-        <div class="form-group">
-          <label>Email:</label>
-          <input type="email" class="form-control" v-model="email">
+      </header>
+
+
+      <section class="container">
+
+        <div class="row">
+
+          <!-- REGISTER -->
+          <div class="col-md-6">
+
+            <h2>Create <strong>Account</strong></h2>
+
+            <form class="white-row" v-on:submit.prevent="submit()">
+
+              <!-- alert failed -->
+ <!--              <div class="alert alert-danger">
+                <i class="fa fa-frown-o"></i> 
+                <strong>Password</strong> do not match!
+              </div> -->
+
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label>E-mail Address</label>
+                    <input type="text" v-model="email" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <label>Password</label>
+                    <input type="password" v-model="password" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Re-enter Password</label>
+                    <input type="password" v-model="passwordConfirmation" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <input type="submit" value="Sign Up" class="btn btn-primary pull-right push-bottom" data-loading-text="Loading...">
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+          <!-- /REGISTER -->
+
+          <!-- WHY? -->
+          <div class="col-md-6">
+
+            <h2>Take your first step.</h2>
+
+            <div class="white-row">
+
+              <h4>There's never been a better time to meet your goals.</h4>
+
+              <p>Once you're registered, you can:</p>
+              <ul class="list-icon check">
+                <li>Find professional personal trainers in your area</li>
+                <li>Practice or learn a wide range of workouts</li>
+                <li>Track your diet</li>
+                <li>Some other stuff probably</li>
+                <li>Connect with the Sparq community.</li>
+              </ul>
+
+              <hr class="half-margins" />
+
+              <p>
+                Already have an account?
+                 <router-link to="/userslogin">Sign in</router-link>
+              </p>
+            </div>
+
+            <div class="white-row">
+              <h4>Join the Sparq Team</h4>
+              <p>
+                If you're looking to become a Sparq personal trainer <router-link to="/trainerssignup">register here</router-link>.
+              </p>
+            </div>
+
+          </div>
+          <!-- /WHY? -->
+
         </div>
-        <div class="form-group">
-          <label>Password:</label>
-          <input type="password" class="form-control" v-model="password">
-        </div>
-        <div class="form-group">
-          <label>Password confirmation:</label>
-          <input type="password" class="form-control" v-model="passwordConfirmation">
-        </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
-      </form>
+
+      </section>
+
+    </div>
+  </div>
+  <!-- /WRAPPER -->
     </div>
   </div>
 </template>

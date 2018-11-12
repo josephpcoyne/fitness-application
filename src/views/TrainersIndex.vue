@@ -1,66 +1,59 @@
 
 <template>
   <div class="trainers">
-  	<input v-model="searchText" list="tags" placeholder="Search by Tags">
-  	
-  	<transition-group name="fade">
-			<div v-for="trainer in orderBy(filterBy(trainers, searchText), sortAttribute, sortAscending)" v-bind:key="trainer.id">
-				<router-link v-bind:to="'/trainers/' + trainer.id">{{trainer.first_name}} {{trainer.last_name}} </router-link>
-				<br>
-				<img :src="(trainer.image_url)">
+  	<!-- WRAPPER -->
+  	<div id="wrapper">
 
-				<p>{{trainer.bio}}</p>
-				<div v-for="tag in trainer.tags">
-					<li v-on:click="searchText = tag.name">{{tag.name}}</li>
+  		<!-- PAGE TITLE -->
+  		<section class="container">
 
-				</div>
-				<br>
-	 		</div>
- 		</transition-group>
+  			<h2>Find your <strong>guide</strong></h2>
+
+  			<p class="lead">Local trainers dedicated to helping you do your best in any area you want to pursue!</p>
+				<input class="form-control col-md-3" v-model="searchText" list="tags" placeholder="Search by Tags">
+  			<div class="row">
+  				<ul class="sort-destination isotope" data-sort-id="isotope-list" v-for="trainer in orderBy(filterBy(trainers, searchText), sortAttribute, sortAscending)" v-bind:key="trainer.id">
+  					<li class="isotope-item col-md-3"><!-- item 1 -->
+  						<div class="item-box fixed-box">
+  							<figure>
+  								<router-link v-bind:to="'/trainers/' + trainer.id"><img class="img-responsive" :src="(trainer.image_url)" width="263" height="263" alt=""></router-link>
+  							</figure>
+  							<div class="item-box-desc">
+  								<h4>{{trainer.first_name}} {{trainer.last_name}}</h4>
+  								<p>{{trainer.bio}}</p>
+  								<hr />
+  								<div>
+  									<span v-for="tag in trainer.tags" id="tags" class="label label-primary" v-on:click="searchText = tag.name">{{tag.name}}</span>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  				</ul>
+  			</div><!-- /.masonry-container -->
+
+  			<!-- CALLOUT -->
+  			<div class="bs-callout text-center nomargin-bottom">
+  				<h3>Be part of <strong>Atropos Team</strong>. Send us your CV! <a href="contact-us.html" target="_blank" class="btn btn-primary btn-lg">Ok, let's do it!</a></h3>
+  			</div>
+  			<!-- /CALLOUT -->
+  		</section>
+
+  	</div>
+  	<!-- /WRAPPER -->
  	 	<datalist id="tags">
  			<option v-for="tag in tags">{{ tag.name }}</option>
  	 	</datalist>
-<!--  		<div>
- 		  <button v-on:click="setSortAttribute('name')">Sort by name</button>
- 		  <button v-on:click="setSortAttribute('bio')">Sort by bio</button>
- 		</div> -->
-
 	</div>
 </template>
 
 <style>
-/* Vue.js fade */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0
-}
-
-/* Vue.js slide-right */
-.slide-right-enter-active {
-  transition: all .3s ease;
-}
-.slide-right-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-right-enter, .slide-right-leave-to {
-  transform: translateX(10px);
-    opacity: 0;
-  }
-
-  /* Vue.js slide-left */
-  .slide-left-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-left-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-left-enter, .slide-left-leave-to {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-
+	#tags {
+		padding: 5px;
+	}
+	hr {
+		margin-top: 0px;
+		margin-bottom: 10px;
+	}
 </style>
 
 <script>
@@ -103,4 +96,5 @@ export default {
 	computed: {}
 };
 </script>
+../assets/trainer_profile1.jpg
 

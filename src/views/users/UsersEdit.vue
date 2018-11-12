@@ -16,6 +16,14 @@
       <div class="form-group">
         <label>Username:</label>
         <input type="text" v-model="username">
+      </div>      
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="text" v-model="password">
+      </div>      
+      <div class="form-group">
+        <label>Password Confirmation:</label>
+        <input type="text" v-model="password">
       </div>
       <div class="form-group">
         <label>Email:</label>
@@ -47,6 +55,8 @@ export default {
       firstName: "",
       lastName: "",
       username: "",
+      password: "",
+      passwordConfirmation: "",
       email: "",
       image: "",
       height: "",
@@ -79,6 +89,8 @@ export default {
         formData.append("first_name", this.firstName);
         formData.append("last_name", this.lastName);
         formData.append("username", this.username);
+        formData.append("password", this.password);
+        formData.append("password_confirmation", this.password_confirmation);
         formData.append("email", this.email);
         formData.append("image", this.image);
         formData.append("height", this.height);

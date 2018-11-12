@@ -2,75 +2,474 @@
 <template>
   <div class="trainers-show">
   	<div>
-  		<h2>{{ trainer.first_name }} {{ trainer.last_name }}</h2>
-      <button v-if="isTrainer()">
-        <router-link :to="'/trainers/' + trainer.id + '/edit'">Edit</router-link>
-      </button><br>
-      <img :src="trainer.image_url">
-      <p>★★★★★</p>
-  		<h3>{{ trainer.bio }}</h3>
-  		<h3>{{ trainer.rating }}</h3>
-      <div v-for="tag in trainer.tags">
-        <li>{{tag.name}}</li>
+      <!-- WRAPPER -->
+      <div id="wrapper">
+
+        <!-- PAGE TITLE -->
+        <header id="page-title">
+          <div class="container">
+            <button type="button" class="btn btn-default" id="edit" v-if="isTrainer()"><router-link :to="'/trainers/me/edit'">Edit Profile</router-link></button>
+            <h1>{{trainer.first_name}} <strong>{{trainer.last_name}}</strong></h1>
+
+            <ul class="breadcrumb">
+              <li v-if="isUser()"><router-link to="/trainers">Trainers</router-link></li>
+              <li v-else><router-link to="/">Home</router-link></li>
+              <li class="active">About Me</li>
+            </ul>
+          </div>
+        </header>
+
+        <section class="container">
+
+          <!-- Who Am I -->
+          <article class="row">
+            <div class="col-md-6">
+              <div>
+                <div>
+                  <img class="img-responsive" :src="trainer.image_url" width="555" height="311" alt="">
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-md-6">
+              <h3>Who Am I?</h3>
+
+              <p>{{trainer.bio}}</p>
+              <span v-for="tags in trainer.tags" id="tags" class="label label-default">{{tags.name}}</span>
+              <br>
+              <br>
+              <ul class="star-rated styleSecondColor">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+              </ul>
+
+              <hr />
+
+            <div>
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Schedule Workout</a>    
+            </div>
+            <div>
+              <beautiful-chat
+                :participants="participants"
+                :titleImageUrl="titleImageUrl"
+                :onMessageWasSent="onMessageWasSent"
+                :messageList="messageList"
+                :newMessagesCount="newMessagesCount"
+                :isOpen="isChatOpen"
+                :close="closeChat"
+                :open="openChat"
+                :showEmoji="true"
+                :showFile="true"
+                :showTypingIndicator="showTypingIndicator"
+                :colors="colors"
+                :alwaysScrollToBottom="alwaysScrollToBottom" />
+            </div>
+<!-- Appointment Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                <form v-on:submit.prevent="submit()">
+                  <div class="modal-header"><!-- modal header -->
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Schedule Workout Appointment</h4>
+                  </div><!-- /modal header -->
+
+                  <!-- modal body -->
+                  <div class="modal-body">
+                    <vue-ctk-date-time-picker
+                    v-model="datetime"
+                    :disabled-dates="['2018-04-03', '2018-04-07', '2018-04-09', '2018-04-11', '2018-04-13', '2018-04-15', '2018-04-17', '2018-04-19']"
+                    label="Choose date time"
+                    :enable-button-validate="true"
+                    color="#FF7F50"
+                    without-header
+                    :without-input="true"
+                    no-weekends-days
+                    inline
+                    ></vue-ctk-date-time-picker>
+                    <span>Appointment with {{trainer.first_name}} at {{datetime}}</span>
+                  </div>
+                  <!-- /modal body -->
+
+                  <div class="modal-footer"><!-- modal footer -->
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button> 
+                    <input class="btn btn-primary" type="submit" value="Schedule"></input>
+                  </div>
+                </form>
+                  <!-- /modal footer -->
+
+                </div>
+              </div>
+            </div>
+<!-- End Appointment Modal -->
+            </div>
+          </article>
+          <!-- /Who Am I -->
+
+          <div class="divider"><!-- divider -->
+            <i class="fa fa-star"></i>
+          </div>
+
+          <!-- SKILLS -->
+<!--           <div class="row">
+
+            <div class="col-xs-6 col-md-3">
+              <div class="text-center">
+                <div class="circular-bar">
+                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="87" data-readOnly="true" data-displayInput="false">
+                  <div class="circular-bar-content">
+                    <strong>HTML</strong>
+                    <label>91%</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="text-center">
+                <div class="circular-bar">
+                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="93" data-readOnly="true" data-displayInput="false">
+                  <div class="circular-bar-content">
+                    <strong>CSS</strong>
+                    <label>93%</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+              <div class="text-center">
+                <div class="circular-bar">
+                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="73" data-readOnly="true" data-displayInput="false">
+                  <div class="circular-bar-content">
+                    <strong>WORDPRESS</strong>
+                    <label>73%</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="text-center">
+                <div class="circular-bar">
+                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="61" data-readOnly="true" data-displayInput="false">
+                  <div class="circular-bar-content">
+                    <strong>PHOTOSHOP</strong>
+                    <label>61%</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+          <!-- /SKILLS -->
+
+
+          <!-- WORK -->
+          <section class="container">
+            <h2>
+              My experiences:</span>
+            </h2>
+
+            <div class="row">
+
+              <div class="col-md-3"><!-- item 1 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover" href="portfolio-single.html">
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/scouter-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Project</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3"><!-- item 2 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover lightbox" :href="trainer.video_url" data-plugin-options='{"type":"iframe"}'>
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>VIEW</strong> VIDEO
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/black-kitty-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Video</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 3 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover lightbox" href="assets/images/demo/portfolio/merchant2-600x403.jpg" data-plugin-options='{"type":"image"}'>
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/merchant2-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Image</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 4 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover" href="portfolio-single.html">
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/flippin-the-bird1-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Project</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 5 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover lightbox" href="http://www.youtube.com/watch?v=W7Las-MJnJo" data-plugin-options='{"type":"iframe"}'>
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>VIEW</strong> VIDEO
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/night_to_remember1-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Video</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 6 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover lightbox" href="assets/images/demo/portfolio/spacebound-600x403.jpg" data-plugin-options='{"type":"image"}'>
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/spacebound-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Image</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 7 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover" href="portfolio-single.html">
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/be-my-guest1-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Project</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3"><!-- item 8 -->
+                <div class="item-box">
+                  <figure>
+                    <a class="item-hover" href="portfolio-single.html">
+                      <span class="overlay color2"></span>
+                      <span class="inner">
+                        <span class="block fa fa-plus fsize20"></span>
+                        <strong>PROJECT</strong> DETAIL
+                      </span>
+                    </a>
+                    <img class="img-responsive" src="assets/images/demo/portfolio/black-box5-600x403.jpg" width="260" height="260" alt="">
+                  </figure>
+                  <div class="item-box-desc">
+                    <h4>Atropos Project</h4>
+                    <small class="styleColor">29 June, 2014</small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+          <!-- /WORK -->
+
+
+
+          <!-- CALLOUT -->
+          <section class="container">
+
+            <div class="bs-callout text-center nomargin-bottom">
+              <h3>Come on, let's work <strong>together</strong>! <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Schedule Workout</a></h3>
+            </div>
+          </section>
+          <!-- /CALLOUT -->
+
+        </section>
+
+
       </div>
-  		<h4>{{ trainer.location }}</h4>
-      <iframe width="560" height="315" :src="trainer.video_url + '?&showinfo=0&controls=0&amp;start=5'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  	</div>
-
-<!-- Appointment Create Modal -->
-
-    <div v-if="isUser()" class="appointment-new">
-      <h4>Schedule {{trainer.full_name}}</h4>
-      <form v-on:submit.prevent="submit()">
-        <ul>
-          <li class="text-danger" v-for="error in errors">{{ error }}</li>
-        </ul>
-        <div class="form-group">
-          <label></label> 
-          <input type="datetime-local" class="form-control" v-model="time">
-        </div>
-        <input type="submit" value="submit">
-      </form>
-      <router-link to="/trainers">Back to trainers</router-link>
+      <!-- /WRAPPER -->
     </div>
-
-<!-- Appointment Create Modal End -->
   </div>
 </template>
 
 <style>
-  img {
-    height: 35%;
-    width: 35%;
-  }
+#edit {
+  align-items: right;
+  position: absolute;
+  right: 0px;
+  margin-top: 15px;
+}
+#tags {
+  margin-right: 5px;
+}
+
+button.datepicker-button {
+  display: none;
+  visibility: hidden;
+}
 </style>
 
 <script>
+var moment = require('moment');
 import axios from "axios";
+import Chat from "vue-beautiful-chat";
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
+
 export default {
+  components: {
+      VueCtkDateTimePicker
+  },
   data: function() {
     return {
       trainer: {},
       time: "",
-      errors: []
+      date: "",
+      datetime: "",
+      errors: [],
+      participants: [
+              {
+                id: 'user1',
+                name: "",
+                imageUrl: ''
+              },
+              {
+                id: 'user2',
+                name: 'User',
+                imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
+              }
+            ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
+            titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+            messageList: [
+                { type: 'text', author: `user1`, data: { text: `Have any questions? Feel free to ask!` } },
+            ], // the list of the messages to show, can be paginated and adjusted dynamically
+            newMessagesCount: 0,
+            isChatOpen: false, // to determine whether the chat window should be open or closed
+            showTypingIndicator: '', // when set to a value matching the participant.id it shows the typing indicator for the specific user
+            colors: {
+              header: {
+                bg: '#FF7F50',
+                text: '#ffffff'
+              },
+              launcher: {
+                bg: '#FF7F50'
+              },
+              messageList: {
+                bg: '#ffffff'
+              },
+              sentMessage: {
+                bg: '#ffd394',
+                text: '#ffffff'
+              },
+              receivedMessage: {
+                bg: '#eaeaea',
+                text: '#000000'
+              },
+              userInput: {
+                bg: '#f4f7f9',
+                text: '#565867'
+              }
+            }, // specifies the color scheme for the component
+            alwaysScrollToBottom: false // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
     };
   },
   created: function() {
   	axios.get("http://localhost:3000/api/trainers/" + this.$route.params.id)
   	.then(response => {
   		this.trainer = response.data;
+      this.participants[0].name = response.data.first_name
+      this.participants[0].imageUrl = response.data.image_url
   	});
   },
   methods: {
+    sendMessage (text) {
+          if (text.length > 0) {
+            this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
+            this.onMessageWasSent({ author: 'support', type: 'text', data: { text } })
+          }
+        },
+        onMessageWasSent (message) {
+          // called when the user sends a message
+          this.messageList = [ ...this.messageList, message ]
+        },
+        openChat () {
+          // called when the user clicks on the fab button to open the chat
+          this.isChatOpen = true
+          this.newMessagesCount = 0
+        },
+        closeChat () {
+          // called when the user clicks on the botton to close the chat
+          this.isChatOpen = false
+        },
     submit: function() {
       var params = {
-        time: this.time,
+        datetime: this.datetime,
         trainer_id: this.trainer.id
       }
       axios
         .post("http://localhost:3000/api/appointments", params)
         .then(response => {
-          this.$router.push("/appointments");
+          this.$router.push("/usersappointments");
         })
         .catch(error => {
           this.errors = error.response.data.errors;
