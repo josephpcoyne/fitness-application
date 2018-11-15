@@ -89,11 +89,11 @@ export default {
 		};
 	},
 	created: function() {
-		axios.get("http://localhost:3000/api/trainers").then(response => {
+		axios.get("/api/trainers").then(response => {
 			console.log(response.data);
 			this.trainers = response.data;
 		});
-		axios.get("http://localhost:3000/api/tags/").then(response => {
+		axios.get("/api/tags/").then(response => {
 		  this.tags = response.data.map(a => {
 		    return { name: a.name, id: a.id };
 		  });

@@ -164,7 +164,7 @@ export default {
   },
   created: function() {
     axios
-      .get("http://localhost:3000/api/trainers/" + this.$route.params.id)
+      .get("/api/trainers/" + this.$route.params.id)
       .then(response => {
         this.trainer = response.data;
         this.firstName = response.data.first_name;
@@ -179,7 +179,7 @@ export default {
           return { text: a.name, id: a.id };
         });
       });
-    axios.get("http://localhost:3000/api/tags/").then(response => {
+    axios.get("/api/tags/").then(response => {
       this.autocompleteItems = response.data.map(a => {
         return { text: a.name, id: a.id };
       });
@@ -208,7 +208,7 @@ export default {
 
       axios
         .patch(
-          "http://localhost:3000/api/trainers/" + this.$route.params.id,
+          "/api/trainers/" + this.$route.params.id,
           formData
         )
         .then(response => {
@@ -220,7 +220,7 @@ export default {
     },
     deleteTrainer: function(trainer) {
       axios
-        .delete("http://localhost:3000/api/trainers/" + this.$route.params.id)
+        .delete("/api/trainers/" + this.$route.params.id)
         .then(response => {
           delete axios.defaults.headers.common["Authorization"];
           localStorage.removeItem("jwt");

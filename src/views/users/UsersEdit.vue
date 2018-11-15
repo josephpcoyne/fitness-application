@@ -113,7 +113,7 @@ export default {
   },
   created: function() {
     axios
-      .get("http://localhost:3000/api/users/" + this.$route.params.id)
+      .get("/api/users/" + this.$route.params.id)
       .then(response => {
         this.user = response.data;
         this.firstName = response.data.first_name
@@ -143,7 +143,7 @@ export default {
         formData.append("height", this.height);
         formData.append("weight", this.weight);
       axios
-        .patch("http://localhost:3000/api/users/" + this.$route.params.id, formData)
+        .patch("/api/users/" + this.$route.params.id, formData)
         .then(response => {
           this.$refs.fileInput.value = "";
           this.$router.push("/users/me");
@@ -154,7 +154,7 @@ export default {
     },
     deleteUser: function(user) {
       axios
-        .delete("http://localhost:3000/api/users/" + this.$route.params.id)
+        .delete("/api/users/" + this.$route.params.id)
         .then(response => {
           delete axios.defaults.headers.common["Authorization"];
           localStorage.removeItem("jwt");

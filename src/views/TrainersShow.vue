@@ -326,7 +326,7 @@ export default {
     };
   },
   created: function() {
-  	axios.get("http://localhost:3000/api/trainers/" + this.$route.params.id)
+  	axios.get("/api/trainers/" + this.$route.params.id)
   	.then(response => {
   		this.trainer = response.data;
       this.rating = response.data.rating
@@ -360,7 +360,7 @@ export default {
         trainer_id: this.trainer.id
       }
       axios
-        .post("http://localhost:3000/api/appointments", params)
+        .post("/api/appointments", params)
         .then(response => {
           $("#myModal").modal("hide");
           this.$router.push("/usersappointments");

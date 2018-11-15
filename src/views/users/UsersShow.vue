@@ -128,7 +128,7 @@ export default {
   },
   created: function() {
     axios
-      .get("http://localhost:3000/api/users/" + this.$route.params.id)
+      .get("/api/users/" + this.$route.params.id)
       .then(response => {
         this.user = response.data;
       });

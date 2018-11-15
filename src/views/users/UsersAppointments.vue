@@ -249,7 +249,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/appointments").then(response => {
+    axios.get("/api/appointments").then(response => {
       console.log(response.data);
       this.appointments = response.data;
       this.rating = response.data.rating;
@@ -266,7 +266,7 @@ export default {
       };
       axios
         .patch(
-          "http://localhost:3000/api/appointments/" +
+          "/api/appointments/" +
             this.currentAppointment.id,
           params
         )
@@ -281,7 +281,7 @@ export default {
     deleteAppointment: function(appointment) {
       axios
         .delete(
-          "http://localhost:3000/api/appointments/" + this.currentAppointment.id
+          "/api/appointments/" + this.currentAppointment.id
         )
         .then(response => {
           $("#myModal").modal("hide");
