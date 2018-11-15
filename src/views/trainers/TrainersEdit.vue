@@ -93,7 +93,7 @@
                 <div class="form-group">
                   <div class="col-md-12">
                     <label>Bio</label>
-                    <textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="contact_message" id="contact_message">{{trainer.bio}}</textarea>
+                    <textarea maxlength="5000" rows="10" v-model="bio" class="form-control" name="bio" id="contact_message">{{trainer.bio}}</textarea>
                   </div>
                 </div>
               </div>
@@ -134,6 +134,8 @@
               </figure>
               <p>
                 Lorem Ipsum banana mango blackberry persimmon apple raspberries
+                {{tags.map(a => a.id)}}
+
               </p>
             </div>
           </div>
@@ -146,15 +148,15 @@
 </template>
 <style>
 .tags.valid {
-  background-color: #FF7F50;
-  }
-  #delete {
+  background-color: #ff7f50;
+}
+#delete {
   align-items: right;
   position: absolute;
   right: 0px;
   margin-right: 10px;
   margin-top: 10px;
-  }
+}
 </style>
 <script>
 import axios from "axios";
@@ -179,7 +181,7 @@ export default {
       tag: "",
       tags: [],
       autocompleteItems: [],
-      errors: [],
+      errors: []
     };
   },
   created: function() {
@@ -219,10 +221,12 @@ export default {
       formData.append("password", this.password);
       formData.append("password_confirmation", this.passwordConfirmation);
       formData.append("email", this.email);
-      formData.append("image", this.image);
       formData.append("bio", this.bio);
       formData.append("location", this.location);
-      formData.append("tags", this.tags.map(a => [a.id]));
+      formData.append("tags", this.tags.map(a => a.id));
+      if (this.image) {
+        formData.append("image", this.image);
+      }
 
       axios
         .patch(
@@ -230,7 +234,6 @@ export default {
           formData
         )
         .then(response => {
-          this.$refs.fileInput.value = "";
           this.$router.push("/trainers/me");
         })
         .catch(error => {
@@ -254,7 +257,7 @@ export default {
       return this.autocompleteItems.filter(i =>
         new RegExp(this.tag, "i").test(i.text)
       );
-    } 
+    }
   }
 };
 </script>

@@ -27,9 +27,13 @@
               <form class="white-row" v-on:submit.prevent="submit()">
 
                 <!-- alert failed -->
-                <div v-if="errors" class="alert alert-danger">
+                <div class="alert alert-danger" v-if="errors == 'Password confirmation doesn\'t match Password'">
                   <i class="fa fa-frown-o"></i> 
-                  Wrong <strong>E-mail Address</strong> or <strong>Password</strong>!
+                  <strong>Passwords</strong> do not match!
+                </div>                
+                <div class="alert alert-danger" v-else-if="errors == 'Password can\'t be blank'">
+                  <i class="fa fa-frown-o"></i> 
+                  <strong>Password</strong> is blank!
                 </div>
 
                 <div class="row">
@@ -60,17 +64,12 @@
                     <input type="submit" value="Sign In" class="btn btn-primary pull-right" data-loading-text="Loading...">
                   </div>
                 </div>
-
               </form>
-
             </div>
             <!-- /LOGIN -->
-
           </div>
-
-
           <p>
-            Don't have an account yet? <router-link to="/userssignup">Ignite a Sparq today!</router-link>
+            Don't have an account yet? <router-link to="/trainerssignup">Ignite a Sparq today!</router-link>
           </p>
 
         </section>

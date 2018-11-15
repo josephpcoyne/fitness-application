@@ -2,32 +2,11 @@
   <div id="app">
 <!-- Top Bar -->
     <div id="nav">
-     <header id="topHead">
-      <div class="container">
 
-        <!-- PHONE/EMAIL -->
-        <!-- SIGN IN -->
-        <div class="pull-right nav signin-dd">
-          <a v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link></a>
-          <a v-else><router-link to="/userslogin">
-            <i class="fa fa-users"></i>
-            <span> Sign In</span>
-          </router-link></a>
-
-        </div>
-        <!-- /SIGN IN -->
-        <!-- LINKS -->
-        <div class="pull-right nav hidden-xs">
-          <a v-if="isLoggedIn()"><router-link to="/users/me">Profile</router-link></a>
-
-        </div>
-        <!-- /LINKS -->
-      </div>
-    </header>
     <!-- /Top Bar -->
 
     <!-- TOP NAV -->
-    <header id="topNav" class="topHead"><!-- remove class="topHead" if no topHead used! -->
+    <header id="topNav"><!-- remove class="topHead" if no topHead used! -->
       <div class="container">
 
         <!-- Mobile Menu Button -->
@@ -36,21 +15,16 @@
         </button>
 
         <!-- Logo text or image -->
-        <a class="logo" href="index.html">
-        <router-link to="/">Sparq</router-link></li>
+        <a class="logo" href="/">
+          <img src="./assets/sparqcropped.png" alt="Sparq" />
         </a>
-
         <!-- Top Nav -->
         <div class="navbar-collapse nav-main-collapse collapse pull-right">
-          <nav class="nav-main mega-menu">
-            <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
-              <li class="active">
-                <a>
-                  <router-link to="/">Home</router-link>
-                </a>
-              </li>
-              <li class="active">
-                <a v-if="isUser()">
+          <nav class="">
+            <ul class="nav nav-pills nav-main">
+
+              <li>
+                <a v-if="isUser()" class="styleColor">
                 <router-link to="/trainers">Trainers</router-link>
                 </a>
               </li>
@@ -59,25 +33,25 @@
                   <router-link to="/usersappointments">Appointments</router-link>
                 </a>
               </li>
-
-              <!-- GLOBAL SEARCH -->
-    <!--           <li class="search"> -->
-                <!-- search form -->
-<!--                 <form method="get" action="#" class="input-group pull-right">
-                  <input type="text" class="form-control" name="k" id="k" value="" placeholder="Search">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary notransition"><i class="fa fa-search"></i></button>
-                  </span>
-                </form> -->
-                <!-- /search form -->
-<!--               </li> -->
-              <!-- /GLOBAL SEARCH -->
             </ul>
           </nav>
         </div>
         <!-- /Top Nav -->
 
       </div>
+      <ul class="pull-right" id="signin">
+        <li class="active" v-if="isLoggedIn()">
+          <a>
+            <router-link to="/logout">Sign Out</router-link>
+          </a>
+        </li>
+        <li class="active" v-else="isLoggedOut()">
+          <a>
+            <router-link to="/userslogin">Sign In</router-link>
+          </a>
+        </li>              
+      </ul>
+
     </header>
     <!-- /TOP NAV -->
 
@@ -151,8 +125,17 @@
 </template>
 
 <style>
-body {
-  margin-top: 50px;
+#signin {
+  margin-right: 20px;
+  margin-top: -43px;
+  list-style-type: none;
+}
+a.logo {
+  width: 115px;
+}
+.logo img {
+  width: 100%;
+  height: auto;
 }
 </style>
 

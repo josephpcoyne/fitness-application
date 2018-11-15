@@ -38,13 +38,12 @@
               <span v-for="tags in trainer.tags" id="tags" class="label label-default">{{tags.name}}</span>
               <br>
               <br>
-              <ul class="star-rated styleSecondColor">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-              </ul>
+<!--               <star-rating 
+              v-model="rating"
+              star-size="25"
+              active-color="#FF7F50"
+              :show-rating="false">
+              </star-rating> -->
 
               <hr />
 
@@ -80,7 +79,7 @@
                   <!-- modal body -->
                   <div class="modal-body">
                     <vue-ctk-date-time-picker
-                    v-model="datetime"
+                    v-model="time"
                     :disabled-dates="['2018-04-03', '2018-04-07', '2018-04-09', '2018-04-11', '2018-04-13', '2018-04-15', '2018-04-17', '2018-04-19']"
                     label="Choose date time"
                     :enable-button-validate="true"
@@ -90,7 +89,10 @@
                     no-weekends-days
                     inline
                     ></vue-ctk-date-time-picker>
-                    <span>Appointment with {{trainer.first_name}} at {{datetime}}</span>
+                    <div class="settime">
+                      <h4 v-if=" time == '' ">Select a date:</h4>
+                      <h4 v-else>{{ time | moment }}</h4>
+                    </div>
                   </div>
                   <!-- /modal body -->
 
@@ -362,15 +364,25 @@
 #tags {
   margin-right: 5px;
 }
-
 button.datepicker-button {
   display: none;
   visibility: hidden;
 }
+div.datepicker-buttons-container.flex.justify-content-right.button-validate.flex-fixed {
+  display: none;
+  visibility: hidden;
+}
+div.settime {
+  margin-top: -15px;
+}
+.settime h4 {
+  text-align: center;
+}
 </style>
 
 <script>
-var moment = require('moment');
+import moment from "moment";
+import StarRating from 'vue-star-rating'
 import axios from "axios";
 import Chat from "vue-beautiful-chat";
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
@@ -378,14 +390,14 @@ import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
 
 export default {
   components: {
-      VueCtkDateTimePicker
+      VueCtkDateTimePicker,
+      StarRating
   },
   data: function() {
     return {
       trainer: {},
+      rating: "",
       time: "",
-      date: "",
-      datetime: "",
       errors: [],
       participants: [
               {
@@ -437,6 +449,7 @@ export default {
   	axios.get("http://localhost:3000/api/trainers/" + this.$route.params.id)
   	.then(response => {
   		this.trainer = response.data;
+      this.rating = response.data.rating
       this.participants[0].name = response.data.first_name
       this.participants[0].imageUrl = response.data.image_url
   	});
@@ -463,13 +476,15 @@ export default {
         },
     submit: function() {
       var params = {
-        datetime: this.datetime,
+        time: this.time,
         trainer_id: this.trainer.id
       }
       axios
         .post("http://localhost:3000/api/appointments", params)
         .then(response => {
+          $("#myModal").modal("hide");
           this.$router.push("/usersappointments");
+
         })
         .catch(error => {
           this.errors = error.response.data.errors;
@@ -488,6 +503,11 @@ export default {
       return false;
     },  
   },
-  computed: {}
+  computed: {},
+  filters: {
+    moment: function (date) {
+      return moment(date).format('MMMM Do YYYY @ h:mm a');
+    }
+  }
 };
 </script>
