@@ -1,11 +1,52 @@
 <template>
   <div class="users-appointments">
-    <h1>{{ message }}</h1>
-    <div v-for="appointment in appointments">
-      <h3>With {{appointment.trainer_first_name}} {{appointment.trainer_last_name}} at {{appointment.strftime}}</h3>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#appointmentShow" v-on:click="setCurrentAppointment(appointment)">View Appointment</button>
-      </router-link>
-    </div>
+
+    <section class="container">
+
+      <header id="page-title">
+        <div class="container">
+          <h1>Your <strong>appointments</strong></h1>
+
+          <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Appointments</li>
+          </ul>
+        </div>
+      </header>
+
+<!--       <ul class="nav nav-pills isotope-filter isotope-filter" data-sort-id="isotope-list" data-option-key="filter">
+        <li data-option-value="*" class="active"><a href="#">Show All</a></li>
+        <li data-option-value=".ceo"><a href="#">CEO</a></li>
+        <li data-option-value=".marketing"><a href="#">Marketing</a></li>
+        <li data-option-value=".design"><a href="#">Design</a></li>
+      </ul> -->
+
+
+      <div class="row">
+
+        <ul class="sort-destination isotope" data-sort-id="isotope-list" v-for="appointment in appointments">
+
+          <li class="isotope-item col-md-3 ceo" ><!-- item 1 -->
+            <div class="item-box fixed-box">
+              <figure>
+                <img class="img-responsive" :src="appointment.trainer_image" width="263" height="263" alt="" data-toggle="modal" data-target="#appointmentShow" v-on:click="setCurrentAppointment(appointment)">
+              </figure>
+              <div id="appointment-item" class="item-box-desc">
+                <h4>{{appointment.time | momentshow }}</h4>
+                <small class="styleColor">{{appointment.trainer_first_name}} {{appointment.trainer_last_name}}</small>
+                <div class="text-center">
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </div><!-- /.masonry-container -->
+
+
+
+    </section>
       
 <!-- appointment show modal -->
       <div class="modal fade" id="appointmentShow" tabindex="-1" role="dialog" aria-labelledby="appointmentShowLabel" aria-hidden="true">
@@ -33,14 +74,19 @@
                 </div>
                 <div class="col-md-6 info">
                   <h3>Trainer Notes:</h3>
-                  <blockquote>We'll be going hard on your core this time so be sure to eat a light healthy meal. Or don't. I'm just a blockquote.</blockquote>
+                  <blockquote> {{currentAppointment.info}}</blockquote>
+                  Today's workout difficult:
+                  <star-rating 
+                  v-model="currentAppointment.rating"
+                  star-size="25"
+                  active-color="#FF7F50"
+                  read-only
+                  :show-rating="false">
+                  </star-rating>
                   </i><span class="text-danger">Make sure your bring:</span>
 
-                  <ul class="list-icon check">
-                    <li>Water bottle</li>
-                    <li>Yoga mat</li>
-                    <li>Pokeballs</li>
-                    <li>Jump Rope</li>
+                  <ul class="list-icon check" v-for="item in currentAppointment.items">
+                    <li>{{item.name}}</li>
                   </ul>
                 </div>
             </div>
@@ -54,9 +100,11 @@
 <!-----------------------------------Appointment Edit Modal------------------>
     </div>
 <!-- modal dialog -->
+    <form v-on:submit.prevent="submit()">
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+
+          <div class="modal-content modal-lg">
 
             <div class="modal-header"><!-- modal header -->
 
@@ -65,7 +113,7 @@
             </div><!-- /modal header -->
 
             <!-- modal body -->
-            <div class="modal-body">
+            <div id="editmodal" class="modal-body">
               <vue-ctk-date-time-picker
               v-model="time"
               :disabled-dates="['2018-04-03', '2018-04-07', '2018-04-09', '2018-04-11', '2018-04-13', '2018-04-15', '2018-04-17', '2018-04-19']"
@@ -77,21 +125,28 @@
               no-weekends-days
               inline
               ></vue-ctk-date-time-picker>
+              <hr/>
+              <div class="settime">
+                <h4 v-if=" time == '' ">Select a date:</h4>
+                <h4 v-else>{{ time | moment }}</h4>
+              </div>
 
-       
             </div>
 
             <!-- /modal body -->
 
             <div class="modal-footer"><!-- modal footer -->
               <button id="delete" type="button" class="btn btn-danger" v-on:click="deleteAppointment(currentAppointment)">Cancel Appointment</button>  
-<!--               <button class="btn btn-default" data-dismiss="modal">Cancel</button>  -->
-              <button class="btn btn-primary">Save changes</button>
+
+              <input class="btn btn-primary" type="submit" value="Save Changes"></input>
+
             </div><!-- /modal footer -->
+          
 
           </div>
         </div>
       </div>
+    </form>
 
   </div>
 </template>
@@ -106,19 +161,6 @@ blockquote {
 .info h3 {
   margin-top: 25px;
 }
-/*
-.crop {
-    width: 300px;
-    height: 200px;
-    overflow: hidden;
-    margin: 20px;
-}
-
-.crop img {
-    width: 400px;
-    height: 500px;
-    margin: -0px 0 0 -100px;
-}*/
 .modal-body button {
   margin-left: 10px;
   justify-content: center;
@@ -133,13 +175,55 @@ p.when {
 h4.modal-title {
   text-align: center;
 }
-img {
+button#delete {
+  margin-right: 550px;
+  margin-top: 0;
+}
+div.timepicker-container.flex {
+  overflow-x: hidden;
+  height: 420px !important;
+}
+div.month-container {
+  height: auto !important;
+}
+button.datepicker-day.flex.align-center.justify-content-center.enable {
+  flex-grow: 0 !important;
+}
+button.datepicker-day.flex.align-center.justify-content-center.disabled {
+  flex-grow: 0 !important;
+}
+button.datepicker-day.align-center.justify-content-center {
+  flex-grow: 0 !important;
+}
+button.datepicker-button {
+  display: none;
+  visibility: hidden;
+}
+div.datepicker-buttons-container {
+  display: none !important;
+  visibility: hidden;
+}
+div.datepicker-buttons-container.flex.justify-content-right.button-validate.flex-fixed {
+  display: none !important;
+}
+div.settime {
+  margin-top: -15px;
+}
+.settime h4 {
+  text-align: center;
+}
+div#editmodal.modal-body {
+  margin-bottom: 100px;
 }
 div.h-100.mh-100.numbers-container {
+  overflow-x: hidden !important;
 }
-button#delete {
-  margin-right: 410px;
-  margin-top: 0
+
+div.users-appointments {
+  margin-top: 80px;
+}
+div#appointment-item {
+  height: auto !important;
 }
 </style>
 
@@ -147,17 +231,20 @@ button#delete {
 import axios from "axios";
 import moment from "moment";
 import VueMoment from "vue-moment";
-import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
-import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
+import StarRating from "vue-star-rating";
+import VueCtkDateTimePicker from "vue-ctk-date-time-picker";
+import "vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css";
 export default {
   components: {
-      VueCtkDateTimePicker
+    VueCtkDateTimePicker,
+    StarRating
   },
   data: function() {
     return {
       message: "Appointments",
       appointments: [],
       currentAppointment: [],
+      rating: "",
       time: this.time
     };
   },
@@ -165,6 +252,7 @@ export default {
     axios.get("http://localhost:3000/api/appointments").then(response => {
       console.log(response.data);
       this.appointments = response.data;
+      this.rating = response.data.rating;
     });
   },
   methods: {
@@ -174,31 +262,42 @@ export default {
     submit: function() {
       var params = {
         time: this.time,
-        trainer_id: this.currentAppointment.trainer.id
-      }
+        trainer_id: this.currentAppointment.trainer_id
+      };
       axios
-        .patch("http://localhost:3000/api/appointments", params)
+        .patch(
+          "http://localhost:3000/api/appointments/" +
+            this.currentAppointment.id,
+          params
+        )
         .then(response => {
           $("#myModal").modal("hide");
           this.$router.push("#showAppointment");
-
         })
         .catch(error => {
           this.errors = error.response.data.errors;
         });
-      },
+    },
     deleteAppointment: function(appointment) {
       axios
-        .delete("http://localhost:3000/api/appointments/" + this.currentAppointment.id)
+        .delete(
+          "http://localhost:3000/api/appointments/" + this.currentAppointment.id
+        )
         .then(response => {
           $("#myModal").modal("hide");
-          $('#myModal').on('hidden.bs.modal', function () {
-           location.reload();
-          })
-          this.$router.push("/usersappointments");
+          var index = this.appointments.indexOf(appointment);
+          this.appointments.splice(index, 1);
         });
     }
   },
   computed: {},
+  filters: {
+    moment: function(date) {
+      return moment(date).format("MMMM Do YYYY @ h:mm a");
+    },
+    momentshow: function(date) {
+      return moment(date).format("ddd, MMM Do @ h:mm a");
+    }
+  }
 };
 </script>

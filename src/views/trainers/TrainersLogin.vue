@@ -107,7 +107,7 @@ export default {
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("trainer_id", true);
-          this.$router.push("/trainershome");
+          this.$router.push("/trainers/me");
         })
         .catch(error => {
           this.errors = "Invalid email or password.";

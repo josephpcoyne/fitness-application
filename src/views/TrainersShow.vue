@@ -24,10 +24,8 @@
           <!-- Who Am I -->
           <article class="row">
             <div class="col-md-6">
-              <div>
-                <div>
+              <div class="item-box">
                   <img class="img-responsive" :src="trainer.image_url" width="555" height="311" alt="">
-                </div>
               </div>
               
             </div>
@@ -68,7 +66,7 @@
             </div>
 <!-- Appointment Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <form v-on:submit.prevent="submit()">
                   <div class="modal-header"><!-- modal header -->
@@ -89,7 +87,8 @@
                     no-weekends-days
                     inline
                     ></vue-ctk-date-time-picker>
-                    <div class="settime">
+                    <hr/>
+                    <div class="setappointment">
                       <h4 v-if=" time == '' ">Select a date:</h4>
                       <h4 v-else>{{ time | moment }}</h4>
                     </div>
@@ -115,85 +114,26 @@
             <i class="fa fa-star"></i>
           </div>
 
-          <!-- SKILLS -->
-<!--           <div class="row">
-
-            <div class="col-xs-6 col-md-3">
-              <div class="text-center">
-                <div class="circular-bar">
-                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="87" data-readOnly="true" data-displayInput="false">
-                  <div class="circular-bar-content">
-                    <strong>HTML</strong>
-                    <label>91%</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="text-center">
-                <div class="circular-bar">
-                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="93" data-readOnly="true" data-displayInput="false">
-                  <div class="circular-bar-content">
-                    <strong>CSS</strong>
-                    <label>93%</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xs-6 col-md-3">
-              <div class="text-center">
-                <div class="circular-bar">
-                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="73" data-readOnly="true" data-displayInput="false">
-                  <div class="circular-bar-content">
-                    <strong>WORDPRESS</strong>
-                    <label>73%</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="text-center">
-                <div class="circular-bar">
-                  <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="61" data-readOnly="true" data-displayInput="false">
-                  <div class="circular-bar-content">
-                    <strong>PHOTOSHOP</strong>
-                    <label>61%</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div> -->
-          <!-- /SKILLS -->
 
 
           <!-- WORK -->
           <section class="container">
-            <h2>
-              My experiences:</span>
-            </h2>
 
             <div class="row">
 
               <div class="col-md-3"><!-- item 1 -->
                 <div class="item-box">
                   <figure>
-                    <a class="item-hover" href="portfolio-single.html">
+                    <a class="item-hover" href="adult-athlete-body-414029.jpg">
                       <span class="overlay color2"></span>
                       <span class="inner">
                         <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
+                        <strong>View</strong> Image
                       </span>
                     </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/scouter-600x403.jpg" width="260" height="260" alt="">
+                    <img class="img-responsive" src="assets/images/demo/portfolio/adult-athlete-body-414029.jpg" width="260" height="260" alt="">
                   </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Project</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
+      
                 </div>
               </div>
               <div class="col-md-3"><!-- item 2 -->
@@ -206,126 +146,41 @@
                         <strong>VIEW</strong> VIDEO
                       </span>
                     </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/black-kitty-600x403.jpg" width="260" height="260" alt="">
+                    <img class="img-responsive" src="assets/images/demo/portfolio/athletes-endurance-energy-685534.jpg" width="260" height="260" alt="">
                   </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Video</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
+        
                 </div>
               </div>
 
               <div class="col-md-3"><!-- item 3 -->
                 <div class="item-box">
                   <figure>
-                    <a class="item-hover lightbox" href="assets/images/demo/portfolio/merchant2-600x403.jpg" data-plugin-options='{"type":"image"}'>
+                    <a class="item-hover lightbox" href="assets/images/demo/portfolio/active-balance-blond-hair-1117486.jpg" data-plugin-options='{"type":"image"}'>
                       <span class="overlay color2"></span>
                       <span class="inner">
                         <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
+                        <strong>View</strong> Image
                       </span>
                     </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/merchant2-600x403.jpg" width="260" height="260" alt="">
+                    <img class="img-responsive" src="assets/images/demo/portfolio/active-balance-blond-hair-1117486.jpg" width="260" height="260" alt="">
                   </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Image</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
+
                 </div>
               </div>
 
               <div class="col-md-3"><!-- item 4 -->
                 <div class="item-box">
                   <figure>
-                    <a class="item-hover" href="portfolio-single.html">
+                    <a class="item-hover" href="assets/images/demo/portfolio/active-adult-athlete-416778.jpg">
                       <span class="overlay color2"></span>
                       <span class="inner">
                         <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
+                        <strong>View</strong> Image
                       </span>
                     </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/flippin-the-bird1-600x403.jpg" width="260" height="260" alt="">
+                    <img class="img-responsive" src="assets/images/demo/portfolio/active-adult-athlete-416778.jpg" width="260" height="260" alt="">
                   </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Project</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3"><!-- item 5 -->
-                <div class="item-box">
-                  <figure>
-                    <a class="item-hover lightbox" href="http://www.youtube.com/watch?v=W7Las-MJnJo" data-plugin-options='{"type":"iframe"}'>
-                      <span class="overlay color2"></span>
-                      <span class="inner">
-                        <span class="block fa fa-plus fsize20"></span>
-                        <strong>VIEW</strong> VIDEO
-                      </span>
-                    </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/night_to_remember1-600x403.jpg" width="260" height="260" alt="">
-                  </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Video</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3"><!-- item 6 -->
-                <div class="item-box">
-                  <figure>
-                    <a class="item-hover lightbox" href="assets/images/demo/portfolio/spacebound-600x403.jpg" data-plugin-options='{"type":"image"}'>
-                      <span class="overlay color2"></span>
-                      <span class="inner">
-                        <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
-                      </span>
-                    </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/spacebound-600x403.jpg" width="260" height="260" alt="">
-                  </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Image</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3"><!-- item 7 -->
-                <div class="item-box">
-                  <figure>
-                    <a class="item-hover" href="portfolio-single.html">
-                      <span class="overlay color2"></span>
-                      <span class="inner">
-                        <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
-                      </span>
-                    </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/be-my-guest1-600x403.jpg" width="260" height="260" alt="">
-                  </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Project</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3"><!-- item 8 -->
-                <div class="item-box">
-                  <figure>
-                    <a class="item-hover" href="portfolio-single.html">
-                      <span class="overlay color2"></span>
-                      <span class="inner">
-                        <span class="block fa fa-plus fsize20"></span>
-                        <strong>PROJECT</strong> DETAIL
-                      </span>
-                    </a>
-                    <img class="img-responsive" src="assets/images/demo/portfolio/black-box5-600x403.jpg" width="260" height="260" alt="">
-                  </figure>
-                  <div class="item-box-desc">
-                    <h4>Atropos Project</h4>
-                    <small class="styleColor">29 June, 2014</small>
-                  </div>
+      
                 </div>
               </div>
 
@@ -339,7 +194,7 @@
           <!-- CALLOUT -->
           <section class="container">
 
-            <div class="bs-callout text-center nomargin-bottom">
+            <div v-if="isUser()" class="bs-callout text-center nomargin-bottom">
               <h3>Come on, let's work <strong>together</strong>! <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Schedule Workout</a></h3>
             </div>
           </section>
@@ -355,6 +210,23 @@
 </template>
 
 <style>
+div.timepicker-container {
+  overflow-x: hidden;
+  height: 420px !important;
+  width: 200px !important;
+}
+div.month-container {
+  height: auto !important;
+}
+button.datepicker-day.flex.align-center.justify-content-center.enable {
+  flex-grow: 0 !important;
+}
+button.datepicker-day.flex.align-center.justify-content-center.disabled {
+  flex-grow: 0 !important;
+}
+button.datepicker-day.align-center.justify-content-center {
+  flex-grow: 0 !important;
+}
 #edit {
   align-items: right;
   position: absolute;
@@ -368,15 +240,23 @@ button.datepicker-button {
   display: none;
   visibility: hidden;
 }
-div.datepicker-buttons-container.flex.justify-content-right.button-validate.flex-fixed {
-  display: none;
+div.datepicker-buttons-container {
+  display: none !important;
   visibility: hidden;
 }
-div.settime {
-  margin-top: -15px;
+div.datepicker-buttons-container.flex.justify-content-right.button-validate.flex-fixed {
+  display: none !important;
 }
-.settime h4 {
+div.settime {
+  margin-bottom: -120px;
   text-align: center;
+}
+.setappointment h4 {
+  text-align: center;
+}
+div.h-100.mh-100.numbers-container {
+overflow-x: hidden !important;
+
 }
 </style>
 

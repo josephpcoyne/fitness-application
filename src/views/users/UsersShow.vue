@@ -6,6 +6,7 @@
       <!-- PAGE TITLE -->
       <header id="page-title">
         <div class="container">
+          <button type="button" class="btn btn-default" id="edit" v-if="isUser()"><router-link :to="'/users/me/edit'">Edit Profile</router-link></button>
           <h1>About <strong>Me</strong></h1>
 
           <ul class="breadcrumb">
@@ -21,41 +22,37 @@
         <!-- Who Am I -->
         <article class="row">
           <div class="col-md-6">
-            <div>
-              <div>
+            <div class="item-box">
                 <img class="img-responsive" :src="user.image_url" width="555" height="311" alt="">
-              </div>
             </div>
           </div>
           <div class="col-md-6">
-            <h3>Who Am I?</h3>
+            <h3>{{user.first_name }} {{ user.last_name }}</h3>
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             
             <hr />
 
-            <ul class="list-icon star-o">
-              <li>Fully responsive so content looks great</li>
-              <li>Awesome sliders to showcase content</li>
-              <li>Amazing shortcodes loaded with options</li>
+            <ul class="list-icon">
+              <li>I'm here to: </li>
+              <li>Kick ass</li>
+              <li>Check bubblegum</li>
             </ul>
 
           </div>
         </article>
         <!-- /Who Am I -->
 
-        <div class="divider"><!-- divider -->
-          <i class="fa fa-star"></i>
-        </div>
+
 
         <!-- SKILLS -->
-        <div class="row">
+   <!--      <div class="row">
 
           <div class="col-xs-6 col-md-3">
             <div class="text-center">
               <div class="circular-bar">
                 <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="87" data-readOnly="true" data-displayInput="false">
                 <div class="circular-bar-content">
-                  <strong>HTML</strong>
+                  <strong>Target Weight</strong>
                   <label>91%</label>
                 </div>
               </div>
@@ -67,7 +64,7 @@
               <div class="circular-bar">
                 <input class="knob" data-linecap="round" data-bgColor="#FAFAFA" data-fgColor="#F07057" data-thickness=".06" value="93" data-readOnly="true" data-displayInput="false">
                 <div class="circular-bar-content">
-                  <strong>CSS</strong>
+                  <strong>C</strong>
                   <label>93%</label>
                 </div>
               </div>
@@ -98,192 +95,16 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
         <!-- /SKILLS -->
 
 
-        <div class="divider"><!-- divider -->
-          <i class="fa fa-star"></i>
-        </div>
-
-
-        <!-- WORK -->
-        <section class="container">
-          <h2>
-            Some of my <strong>best work</strong> is featured below.
-            <span class="subtitle">We've added over 36 new features! New layouts, short codes, theme options &amp; more!</span>
-          </h2>
-
-          <div class="row">
-
-            <div class="col-md-3"><!-- item 1 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover" href="portfolio-single.html">
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/scouter-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Project</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 2 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover lightbox" href="http://www.youtube.com/watch?v=W7Las-MJnJo" data-plugin-options='{"type":"iframe"}'>
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>VIEW</strong> VIDEO
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/black-kitty-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Video</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 3 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover lightbox" href="assets/images/demo/portfolio/merchant2-600x403.jpg" data-plugin-options='{"type":"image"}'>
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/merchant2-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Image</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 4 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover" href="portfolio-single.html">
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/flippin-the-bird1-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Project</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 5 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover lightbox" href="http://www.youtube.com/watch?v=W7Las-MJnJo" data-plugin-options='{"type":"iframe"}'>
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>VIEW</strong> VIDEO
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/night_to_remember1-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Video</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 6 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover lightbox" href="assets/images/demo/portfolio/spacebound-600x403.jpg" data-plugin-options='{"type":"image"}'>
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/spacebound-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Image</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 7 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover" href="portfolio-single.html">
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/be-my-guest1-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Project</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3"><!-- item 8 -->
-              <div class="item-box">
-                <figure>
-                  <a class="item-hover" href="portfolio-single.html">
-                    <span class="overlay color2"></span>
-                    <span class="inner">
-                      <span class="block fa fa-plus fsize20"></span>
-                      <strong>PROJECT</strong> DETAIL
-                    </span>
-                  </a>
-                  <img class="img-responsive" src="assets/images/demo/portfolio/black-box5-600x403.jpg" width="260" height="260" alt="">
-                </figure>
-                <div class="item-box-desc">
-                  <h4>Atropos Project</h4>
-                  <small class="styleColor">29 June, 2014</small>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-        <!-- /WORK -->
 
 
 
-        <!-- CALLOUT -->
-        <section class="container">
 
-          <div class="bs-callout text-center nomargin-bottom">
-            <h3>Come on, let's work <strong>together</strong>! <a href="contact-us.html" class="btn btn-primary btn-lg">Contact Me!</a></h3>
-          </div>
 
-        </section>
-        <!-- /CALLOUT -->
+
 
       </section>
 
@@ -293,27 +114,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div>
-      <h2>{{ user.first_name }} {{user.last_name}}</h2>
-
-      <h3>{{ user.email }}</h3>
-      <h3>{{ user.weight }}</h3>
-      <h3>{{ user.height }}</h3>
-      <button>
-        <router-link :to="'/users/' + user.id + '/edit'">Edit</router-link></button>
     </div>
   </div>
 </template>
@@ -344,7 +144,13 @@ export default {
       var params = {
         time: this.time
       };
-    }
+    },
+    isUser: function() {
+      if(localStorage.getItem("user_id")) {
+          return true;
+        }
+        return false;
+      },
   },
   computed: {}
 };

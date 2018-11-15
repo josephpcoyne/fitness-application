@@ -32,6 +32,21 @@
                 <a v-if="isUser()">
                   <router-link to="/usersappointments">Appointments</router-link>
                 </a>
+              </li>              
+              <li class="active">
+                <a v-if="isUser()">
+                  <router-link to="/users/me">Profile</router-link>
+                </a>
+              </li>             
+              <li class="active">
+                <a v-if="isTrainer()">
+                  <router-link to="/trainers/me">Profile</router-link>
+                </a>
+              </li>              
+              <li class="active">
+                <a v-if="isTrainer()">
+                  <router-link to="/trainersappointments">Appointments</router-link>
+                </a>
               </li>
             </ul>
           </nav>
@@ -125,6 +140,11 @@
 </template>
 
 <style>
+.nav {
+ width: 300px !important;
+ margin-right: -200px !important;
+ text-align: right;
+}
 #signin {
   margin-right: 20px;
   margin-top: -43px;

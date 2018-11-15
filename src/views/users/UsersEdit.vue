@@ -1,49 +1,98 @@
 <template>
   <div class="users-edit">
-    <form v-on:submit.prevent="submit()">
-      <h1>Edit Profile</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>First Name:</label> 
-        <input type="text" class="form-control" v-model="firstName">
-      </div>
-      <div class="form-group">
-        <label>Last Name:</label>
-        <input type="text" v-model="lastName">
-      </div>
-      <div class="form-group">
-        <label>Username:</label>
-        <input type="text" v-model="username">
-      </div>      
-      <div class="form-group">
-        <label>Password:</label>
-        <input type="text" v-model="password">
-      </div>      
-      <div class="form-group">
-        <label>Password Confirmation:</label>
-        <input type="text" v-model="password">
-      </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <input type="email" v-model="email">
-      </div>
-      <div class="form-group">
-        <label>Height:</label>
-        <input type="number" v-model="height">
-      </div>
-      <div class="form-group">
-        <label>Weight:</label>
-        <input type="number" v-model="weight">
-      </div>
-      <div class="form-group">
-        <label>Profile Picture:</label>
-        <input type="file" v-on:change="setFile($event)" ref="fileInput">
-      </div>
-      <input type="submit" value="Submit">
-    </form>
-    <button v-on:click="deleteUser(user)">Delete Account</button>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+
+      <!-- PAGE TITLE -->
+      <header id="page-title"> <!-- style="background-image:url('assets/images/demo/parallax_bg.jpg')" -->
+        <!--
+          Enable only if bright background image used
+          <span class="overlay"></span>
+        -->
+
+        <div class="container">
+          <h1>Edit Profile</h1>
+
+          <ul class="breadcrumb">
+            <li><router-link to="/trainers/me">Profile</router-link></li>
+            <li class="active">Edit</li>
+          </ul>
+        </div>
+      </header>
+
+      <section id="contact" class="container">
+
+        <div class="row">
+
+          <!-- FORM -->
+          <div class="col-md-8">
+
+            <form id="contactForm" class="white-row" v-on:submit.prevent="submit()">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-5">
+                    <label>First Name</label>
+                    <input type="text" v-model="firstName" maxlength="100" class="form-control" id="contact_name">
+                  </div>                  
+                  <div class="col-md-5">
+                    <label>Last Name</label>
+                    <input type="text" v-model="lastName" maxlength="100" class="form-control" id="contact_name">
+                  </div>            
+                  <div class="col-md-5">
+                    <label>Username</label>
+                    <input type="text" v-model="username" maxlength="100" class="form-control" id="contact_name">
+                  </div>
+                  <div class="col-md-5">
+                    <label>E-mail</label>
+                    <input type="email" v-model="email" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control"  id="contact_email">
+                  </div>
+                  <div class="col-md-5">
+                    <label>Password</label>
+                    <input type="password" v-model="password" data-msg-required="Please enter your phone" data-msg-email="Please enter your phone" maxlength="100" class="form-control"  id="contact_phone">
+                  </div>          
+                  <div class="col-md-5" v-if="password">
+                    <label>Password Confirmation</label>
+                    <input type="password" v-model="passwordConfirmation" data-msg-required="Please enter your phone" data-msg-email="Please enter your phone" maxlength="100" class="form-control" id="contact_phone">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label>Profile Picture</label>
+                    <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
+                  </div>
+                </div>
+              </div>
+            <br />
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <input id="contact_submit" type="submit" value="Save" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                  <button id="trainerdelete" type="button" class="btn btn-danger" v-on:click="deleteUser(user)">Delete Account</button>
+                </div>
+              </div>
+            </form>
+          
+          </div>
+          <!-- /FORM -->
+
+
+          <!-- INFO -->
+          <div class="col-md-4">
+            <div class="white-row">
+              <figure>
+                <img class="radius6 img-responsive" :src="user.image_url" alt="" />
+              </figure>
+            </div>
+          </div>
+          <!-- /INFO -->
+        </div>
+      </section>
+    </div>
+    <!-- /WRAPPER -->
+
   </div>
 </template>
 
@@ -59,8 +108,6 @@ export default {
       passwordConfirmation: "",
       email: "",
       image: "",
-      height: "",
-      weight: "",
       errors: []
     };
   },

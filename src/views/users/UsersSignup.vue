@@ -77,11 +77,11 @@
 
                 <p>Once you're registered, you can:</p>
                 <ul class="list-icon check">
-                  <li>Find professional personal trainers in your area</li>
-                  <li>Practice or learn a wide range of workouts</li>
-                  <li>Track your diet</li>
-                  <li>Some other stuff probably</li>
-                  <li>Connect with the Sparq community.</li>
+                  <li>Find professional trainers in your area</li>
+                  <li>Practice or learn optimum exercises for your goals</li>
+                  <li>Achieve maximum results without wasting time</li>
+                  <li>Nutrition tracking and planning</li>
+                  <li>Connect with the Sparq community</li>
                 </ul>
 
                 <hr class="half-margins" />

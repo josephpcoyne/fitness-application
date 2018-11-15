@@ -26,23 +26,6 @@
 
           <!-- FORM -->
           <div class="col-md-8">
-            <!-- 
-              if you want to use your own contact script, remove .hide class
-            -->
-
-            <!-- SENT OK -->
-<!--             <div id="_sent_ok_" class="alert alert-success fade in fsize16 hide">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Thank You!</strong> Your message successfully sent!
-            </div> -->
-            <!-- /SENT OK -->
-
-            <!-- SENT FAILED -->
-<!--             <div id="_sent_required_" class="alert alert-danger fade in fsize16 hide">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Failed!</strong> Please complete all mandatory (*) fields!
-            </div> -->
-            <!-- /SENT FAILED -->
 
             <form id="contactForm" class="white-row" v-on:submit.prevent="submit()">
               <div class="row">
@@ -117,7 +100,7 @@
                 <div class="col-md-12">
 
                   <input id="contact_submit" type="submit" value="Save" class="btn btn-primary btn-lg" data-loading-text="Loading...">
-                  <button id="delete" type="button" class="btn btn-danger" v-on:click="deleteTrainer(trainer)">Delete Account</button>
+                  <button id="trainerdelete" type="button" class="btn btn-danger" v-on:click="deleteTrainer(trainer)">Delete Account</button>
                 </div>
               </div>
             </form>
@@ -132,11 +115,6 @@
               <figure>
                 <img class="radius6 img-responsive" :src="trainer.image_url" alt="" />
               </figure>
-              <p>
-                Lorem Ipsum banana mango blackberry persimmon apple raspberries
-                {{tags.map(a => a.id)}}
-
-              </p>
             </div>
           </div>
           <!-- /INFO -->
@@ -150,12 +128,12 @@
 .tags.valid {
   background-color: #ff7f50;
 }
-#delete {
-  align-items: right;
+button#trainerdelete {
   position: absolute;
   right: 0px;
   margin-right: 10px;
-  margin-top: 10px;
+  margin-top: 13px;
+  margin-left: 400px;
 }
 </style>
 <script>
