@@ -5,4 +5,4 @@ Application frontend built on Vue.js and Bootstrap.
 
 ![Home splash](https://i.imgur.com/Tzb4BVt.png)
 ![Trainer Browser](https://i.imgur.com/qFwd0OC.png)
-![Trainer Profile](https://i.imgur.com/qFwd0OC.png)
+![Trainer Profile](https://i.imgur.com/oyXZANw.png)
